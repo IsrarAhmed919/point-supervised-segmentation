@@ -1,0 +1,40 @@
+[project]
+name = "pointseg"
+version = "1.0.0"
+description = "Point-supervised semantic segmentation of aerial imagery with partial cross-entropy"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Israr Ahmed" }]
+keywords = ["semantic-segmentation", "weak-supervision", "point-supervision",
+            "partial-cross-entropy", "remote-sensing", "loveda"]
+
+dependencies = [
+    "torch>=2.1",
+    "torchvision>=0.16",
+    "segmentation-models-pytorch>=0.3.3",
+    "numpy>=1.24",
+    "opencv-python-headless>=4.8",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+notebook = ["jupyterlab>=4.0", "ipywidgets>=8.1", "seaborn>=0.13"]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+pointseg-train    = "pointseg.train:main"
+pointseg-evaluate = "pointseg.evaluate:main"
+pointseg-report   = "pointseg.report:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pointseg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
